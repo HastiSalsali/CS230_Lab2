@@ -1,7 +1,5 @@
-
-// Los Angeles Pierce College
-// Computer Science 230
-// Bit Map File (BMP) Sample 2 - Gray Scale
+//Salsali, Hasti CS230 Section 11091 Date completed
+//Lab 2 - Bresenham's Algorithm
 #include <iostream>
 #include <fstream>
 #include "windows.h"

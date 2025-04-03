@@ -59,23 +59,30 @@ int main(int argc, char* argv[])
 		"Enter two pairs of point coordinates in the range of 0 to " << IMAGE_SIZE << ".\n";
 	cin >> x1 >> y1 >> x2 >> y2;
 
-
+	bool endProgram = 0;
 	if (x1 < 0 || x1 > IMAGE_SIZE) {
 		cout << "Value " << x1 << " out of range, ending.\n";
-		return 1;
+		endProgram = 1;
 	}
 	else if (x2 < 0 || x2 > IMAGE_SIZE) {
 		cout << "Value " << x2 << " out of range, ending.\n";
-		return 1;
+		endProgram = 1;
 	}
 	else if (y1 < 0 || y1 > IMAGE_SIZE) {
 		cout << "Value " << y1 << " out of range, ending.\n";
-		return 1;
+		endProgram = 1;
 	}
 	else if (y2 < 0 || y2 > IMAGE_SIZE) {
 		cout << "Value " << y2 << " out of range, ending.\n";
+		endProgram = 1;
+	}
+	if (endProgram) {
+		bmpOut.close();
 		return 1;
 	}
+
+
+
 
 
 

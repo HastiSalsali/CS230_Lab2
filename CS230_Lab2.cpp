@@ -89,37 +89,38 @@ int main(int argc, char* argv[])
 
 	dx = abs(x2 - x1);
 	dy = abs(y2 - y1);
-	sx = dx < 0 ? 1 : -1;
-	sy = dy < 0 ? 1 : -1;
+	sx = (x2 >= x1) ? 1 : -1;
+	sy = (y2 >= y1) ? 1 : -1;
 	j = y1;
 	i = x1;
-	if (abs(dx) > abs(dy)) {
+	if (dx > dy) {
 		
 		p = 2 * dy - dx;
-		for (i = 0; i <= dx; i += sx) {
+		for (int count = 0; count <= dx;  count ++) {
 			bits[i][j] = IMAGE_SIZE - j;
+			i += sx;
 			if (p < 0) {
 				p += (2 * dy);
 			}
 			else{
 				j += sy;
-				p += 2 * dy - (2 * dx);
+				p += (2 * dy) - (2 * dx);
 			}
-			bits[i][j] = IMAGE_SIZE - j;
+			
 		}
 	}
 	else {
-		p = 2 * dx - dy;
-		for (j = 0; j <= dy; j += sy) {
+		p = (2 * dx) - dy;
+		for (int count = 0; count <= dy; count ++) {
 			bits[i][j] = IMAGE_SIZE - j;
+			j += sy;
 			if (p < 0) {
 				p += (2 * dx);
 			}
 			else {
 				i += sx;
-				p += 2 * dx - (2 * dy);
+				p += (2 * dx) - (2 * dy);
 			}
-			bits[i][j] = IMAGE_SIZE - j;
 		}
 	}
 	

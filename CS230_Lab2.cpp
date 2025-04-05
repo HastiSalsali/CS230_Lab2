@@ -53,8 +53,14 @@ int main(int argc, char* argv[])
 		// for your edification, try setting one of the first three values to 255 instead of i
 			// and see what it does to the generated bit map.
 	}
+	// Build gray scale array of bits in image, 
+	for (i = 0; i < IMAGE_SIZE; i++) {
+		for (j = 0; j < IMAGE_SIZE; j++) {
+			bits[i][j] = j;
+		}
+	}
 
-	unsigned short int x1, y1, x2, y2;
+	int x1, y1, x2, y2, dx, dy, p, increment;
 	cout << "Pierce College CS230 Spring 2025 Lab Assignment 2 - Salsali, Hasti\n"
 		"Enter two pairs of point coordinates in the range of 0 to " << IMAGE_SIZE << ".\n";
 	cin >> x1 >> y1 >> x2 >> y2;
@@ -81,17 +87,30 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+	
+	dx = abs(x2 - x1);
+	dy = abs(y2 - y1);
+	incrementY = dy < 0 ? 1 : -1;
+	if (abs(dx) > abs(dy)) {
 
-
-
-
-
-	// Build gray scale array of bits in image, 
-	for (i = 0; i < IMAGE_SIZE; i++) {
-		for (j = 0; j < IMAGE_SIZE; j++) {
-			bits[i][j] = j;
+		p = 2 * dy - dx;
+		j = y1;
+		i = x1;
+		bits[i][j] = IMAGE_SIZE - j;
+		for (i = x1; i <= x2; i ++) {
+			if (p < 0) {
+				p = p + (2 * dy);
+			}
+			else{
+				j += increment;
+				p = 2 * dy - (2 * dx);
+			}
+			bits[i][j] = IMAGE_SIZE - j;
 		}
 	}
+
+	
+	
 	// Write out the bit map.  
 	char* workPtr;
 	workPtr = (char*)&bmfh;

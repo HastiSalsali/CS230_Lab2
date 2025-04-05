@@ -1,4 +1,4 @@
-//Salsali, Hasti CS230 Section 11091 Date completed
+//Salsali, Hasti CS230 Section 11091 4/6
 //Lab 2 - Bresenham's Algorithm
 #include <iostream>
 #include <fstream>

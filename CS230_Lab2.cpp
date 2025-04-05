@@ -87,14 +87,14 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	
 	dx = abs(x2 - x1);
 	dy = abs(y2 - y1);
 	sx = dx < 0 ? 1 : -1;
 	sy = dy < 0 ? 1 : -1;
 	j = y1;
 	i = x1;
-	if (abs(dx) > abs(dy)) {		
+	if (abs(dx) > abs(dy)) {
+		
 		p = 2 * dy - dx;
 		for (i = 0; i <= dx; i += sx) {
 			bits[i][j] = IMAGE_SIZE - j;
@@ -120,8 +120,9 @@ int main(int argc, char* argv[])
 				p += 2 * dx - (2 * dy);
 			}
 			bits[i][j] = IMAGE_SIZE - j;
+		}
 	}
-
+	
 	
 	
 	// Write out the bit map.  

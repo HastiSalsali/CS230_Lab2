@@ -61,6 +61,8 @@ int main(int argc, char* argv[])
 	}
 
 	int x1, y1, x2, y2, deltaX, deltaY, incrementX, incrementY;
+	//int x1, y1, x2, y2, dx, dy, sx, sy, p;
+
 	cout << "Pierce College CS230 Spring 2025 Lab Assignment 2 - Salsali, Hasti\n"
 		"Enter two pairs of point coordinates in the range of 0 to " << IMAGE_SIZE << ".\n";
 	cin >> x1 >> y1 >> x2 >> y2;
@@ -87,6 +89,7 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+	
 	deltaX = (x2 >= x1) ? (x2 - x1) : (x1 - x2) ;
 	deltaY = (y2 >= y1) ? (y2 - y1) : (y1 - y2);
 	incrementX = (x2 >= x1) ? 1 : -1;
@@ -126,8 +129,8 @@ int main(int argc, char* argv[])
 		//set bit[i][j] = imageSize - j
 		mov esi, IMAGE_SIZE;
 		sub esi, ebx;
-		
-		mov [edi], esi;
+		and [edi], 0xFF00; //zero out the upper bits
+		or [edi], esi;
 		
 		add eax, incrementX; //i += incrementX
 
@@ -162,7 +165,8 @@ int main(int argc, char* argv[])
 		pop ebx;
 		pop eax;
 	}
-
+	
+	
 	/*
 	dx = abs(x2 - x1);
 	dy = abs(y2 - y1);
@@ -205,6 +209,7 @@ int main(int argc, char* argv[])
 		}
 	}
 	*/
+	
 	
 	    
 

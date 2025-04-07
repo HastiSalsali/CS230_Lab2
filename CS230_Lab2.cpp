@@ -97,7 +97,9 @@ int main(int argc, char* argv[])
 		
 		p = 2 * dy - dx;
 		for (int count = 0; count <= dx;  count ++) {
-			bits[i][j] = IMAGE_SIZE - j;
+			bits[i][j] = bits[i - 1][j] = bits[i + 1][j] = IMAGE_SIZE - j;
+			bits[i][j - 1] = IMAGE_SIZE - (j - 1);
+			bits[i][j + 1] = IMAGE_SIZE - (j + 1);
 			i += sx;
 			if (p < 0) {
 				p += (2 * dy);
@@ -112,7 +114,9 @@ int main(int argc, char* argv[])
 	else {
 		p = (2 * dx) - dy;
 		for (int count = 0; count <= dy; count ++) {
-			bits[i][j] = IMAGE_SIZE - j;
+			bits[i][j] = bits[i - 1][j] = bits[i + 1][j] = IMAGE_SIZE - j;
+			bits[i][j - 1] = IMAGE_SIZE - (j - 1);
+			bits[i][j + 1] = IMAGE_SIZE - (j + 1);
 			j += sy;
 			if (p < 0) {
 				p += (2 * dx);

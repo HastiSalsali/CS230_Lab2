@@ -60,8 +60,8 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	int x1, y1, x2, y2, deltaX, deltaY, incrementX, incrementY;
-	//int x1, y1, x2, y2, dx, dy, sx, sy, p;
+	int x1, y1, x2, y2, deltaX, deltaY, incrementX, incrementY; // for assembnly code
+	//int x1, y1, x2, y2, dx, dy, sx, sy, p; //for the c++ code
 
 	cout << "Pierce College CS230 Spring 2025 Lab Assignment 2 - Salsali, Hasti\n"
 		"Enter two pairs of point coordinates in the range of 0 to " << IMAGE_SIZE << ".\n";
@@ -110,7 +110,51 @@ int main(int argc, char* argv[])
 		cmp eax, ebx;
 		jg dxGreater;
 
+	dyGreater:
+		mov edx, deltaX;
+		shl edx, 1;
+		sub edx, deltaY; // edx = p;
 
+		mov eax, i; // eax = i
+		mov ebx, j; // ebx = j
+		mov ecx, 0; //ecx = count
+	forLoop_Y:
+		//load address of array[i][j]
+		mov esi, eax; //esi = i
+		imul esi, IMAGE_SIZE;
+		add esi, ebx; //esi += j
+		lea edi, [bits + esi]; //edi =  &bits[i][j]
+
+		//set bit[i][j] = imageSize - j
+		mov esi, IMAGE_SIZE;
+		sub esi, ebx;
+		and [edi], 0xFF00; //zero out the upper bits
+		or [edi], esi; //bits[i[]j] = IMAGE_SIZE - j
+
+
+		add ebx, incrementY; //j += incrementY
+
+		mov esi, deltaY; //esi = dy
+		shl esi, 1; //esi =( 2 * dy) 
+
+		cmp edx, 0; // p < 0
+		jl negP_Y //jimp to else
+			add eax, incrementX; //i += incrementX
+			sub edx, esi // p -= 2 * dy
+
+			negP_Y :
+		mov esi, deltaX; //esi = dx
+		shl esi, 1; //esi =( 2 * dx) 
+
+		add edx, esi; // p += 2* dx
+
+		add ecx, 1;
+		cmp ecx, deltaY;
+		jg endForLoop_Y;
+		jmp forLoop_Y
+
+
+//////////////////////////////////////////
 	dxGreater:
 		mov edx, deltaY;
 		shl edx, 1;
@@ -124,13 +168,14 @@ int main(int argc, char* argv[])
 		mov esi, eax; //esi = i
 		imul esi, IMAGE_SIZE;
 		add esi, ebx; //esi += j
-		lea edi, [bits + esi];
+		lea edi, [bits + esi]; //edi =  &bits[i][j]
 
 		//set bit[i][j] = imageSize - j
 		mov esi, IMAGE_SIZE;
 		sub esi, ebx;
 		and [edi], 0xFF00; //zero out the upper bits
-		or [edi], esi;
+		or [edi], esi; //bits[i[]j] = IMAGE_SIZE - j
+
 		
 		add eax, incrementX; //i += incrementX
 
@@ -154,6 +199,8 @@ int main(int argc, char* argv[])
 		jmp forLoop_x
 		
 	endForLoop_x:
+	endForLoop_y:
+
 
 		
 
@@ -208,9 +255,9 @@ int main(int argc, char* argv[])
 			}
 		}
 	}
+	
+	
 	*/
-	
-	
 	    
 
 
